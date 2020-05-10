@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import StringVar
+
 
 root = Tk()
 root.title("Calculadora")
@@ -75,11 +75,19 @@ def exponenciar(n):
 	check_operacion = 1
 	numero_pantalla.set(resultado)
 
+def raiz(n):
+	global operacion
+	global resultado
+	global check_operacion
+	resultado = float(n)
+	operacion = "raiz"
+	check_operacion = 1
+	igual()
+
 
 def igual():
 	global resultado
 	global operacion
-	print(operacion)
 	if (operacion == "suma"):
 		numero_pantalla.set(resultado + float(numero_pantalla.get()))
 	elif (operacion == "resta"):
@@ -90,7 +98,8 @@ def igual():
 		numero_pantalla.set(resultado * float(numero_pantalla.get()))
 	elif (operacion == "exponenciar"):
 		numero_pantalla.set(resultado ** float(numero_pantalla.get()))
-
+	elif (operacion == "raiz"):
+		numero_pantalla.set(resultado ** (1/float(2)))
 	resultado = 0
 	operacion=""
 
@@ -103,7 +112,7 @@ boton9 = Button(frame, text="9", width=5, command=lambda: escribePulsado("9"))
 boton9.grid(row=1, column=2)
 boton_div = Button(frame, text="/", width=5, command=lambda: division(numero_pantalla.get()))
 boton_div.grid(row=1, column=3)
-boton_div = Button(frame, text="", width=5, command=lambda: exponenciar(numero_pantalla.get()))
+boton_div = Button(frame, text="^", width=5, command=lambda: exponenciar(numero_pantalla.get()))
 boton_div.grid(row=1, column=4)
 
 # ---------------------------------------------2ª FILA DE BOTONES-------------------------------------------------
@@ -115,6 +124,8 @@ boton6 = Button(frame, text="6", width=5, command=lambda: escribePulsado("6"))
 boton6.grid(row=2, column=2)
 boton_mult = Button(frame, text="X", width=5, command=lambda: multiplicacion(numero_pantalla.get()))
 boton_mult.grid(row=2, column=3)
+boton_raiz = Button(frame, text="√", width=5, command=lambda: raiz(numero_pantalla.get()))
+boton_raiz.grid(row=2, column=4)
 
 # ---------------------------------------------3ª FILA DE BOTONES-------------------------------------------------
 boton1 = Button(frame, text="1", width=5, command=lambda: escribePulsado("1"))
